@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Clone and Build
         run: |
-          BASE="https://gitlab.com"
+          BASE="https://gitlab.com/kalilinux"
           PATH_URL="nethunter/build-scripts"
           git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-installer.git"
           cd kali-nethunter-installer
