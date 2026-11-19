@@ -12,15 +12,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git python3 zip unzip curl wget
 
-      - name: Clone and Build
-        run: |
+          - name: Clone and Build
+          run: |
           BASE="https://gitlab.com/kalilinux"
           PATH_URL="nethunter/build-scripts"
           git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-installer.git"
           cd kali-nethunter-installer
-          git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-devices.git" devices
-          ls -la
-          python3 build.py -d zeroflte-los --nougat --kernel || python3 build.py -h
+          git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-devices.git" kernels
+          python3 build.py -d zeroflte-los --nougat --kernel
+
+         
 
           - name: Upload Kernel Artifact
           uses: actions/upload-artifact@v4
