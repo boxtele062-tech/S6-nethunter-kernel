@@ -10,21 +10,21 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git python3
+          sudo apt-get install -y git python3 zip unzip curl wget
 
       - name: Clone NetHunter Installer
         run: |
-          git clone https://gitlab.com
-          cd kali-nethunter-installer
-          yes | ./bootstrap.sh
+          git clone --depth 1 https://gitlab.com || git clone --depth 1 https://gitlab.com kali-nethunter-installer
 
-      - name: Build Kernel Zip
+      - name: Setup Devices and Build Kernel
         run: |
           cd kali-nethunter-installer
+          if [ -d "nethunter-installer" ]; then cd nethunter-installer; fi
+          git clone --depth 1 https://gitlab.com devices
           python3 build.py -d zeroflte-los --nougat --kernel
 
       - name: Upload Kernel Artifact
         uses: actions/upload-artifact@v4
         with:
           name: zeroflte-los-kernel
-          path: kali-nethunter-installer/kernel-nethunter-*.zip
+          path: "**/kernel-nethunter-*.zip"
