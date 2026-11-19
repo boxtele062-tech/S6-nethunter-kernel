@@ -20,5 +20,5 @@ jobs:
       - name: Upload Kernel Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: zeroflte-los-kernel
-          path: "**/kernel-nethunter-*.zip"
+        name: zeroflte-los-kernel 
+       path: "kali-nethunter-installer/*.zip"
