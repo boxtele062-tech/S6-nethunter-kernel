@@ -19,7 +19,7 @@ jobs:
           git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-installer.git"
           cd kali-nethunter-installer
           git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-devices.git" devices
-          python3 build.py -d zeroflte-los --nougat --kernel
+          python3 build.py -k zeroflte-los --nougat -i
 
       - name: Upload Kernel Artifact
         uses: actions/upload-artifact@v4
