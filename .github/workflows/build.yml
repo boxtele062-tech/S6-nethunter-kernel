@@ -1,0 +1,30 @@
+name: Build NetHunter Kernel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git python3
+
+      - name: Clone NetHunter Installer
+        run: |
+          git clone https://gitlab.com
+          cd kali-nethunter-installer
+          yes | ./bootstrap.sh
+
+      - name: Build Kernel Zip
+        run: |
+          cd kali-nethunter-installer
+          python3 build.py -d zeroflte-los --nougat --kernel
+
+      - name: Upload Kernel Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zeroflte-los-kernel
+          path: kali-nethunter-installer/kernel-nethunter-*.zip
