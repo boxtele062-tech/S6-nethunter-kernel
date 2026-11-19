@@ -18,12 +18,12 @@ jobs:
           PATH_URL="nethunter/build-scripts"
           git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-installer.git"
           cd kali-nethunter-installer
-          yes y | ./bootstrap.sh
-          python3 build.py -d zeroflte-los --nougat --kernel 
-          
+          git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-devices.git" devices
+          ls -la
+          python3 build.py -d zeroflte-los --nougat --kernel || python3 build.py -h
 
-      - name: Upload Kernel Artifact
-        uses: actions/upload-artifact@v4
-        with:
+          - name: Upload Kernel Artifact
+          uses: actions/upload-artifact@v4
+          with:
           name: zeroflte-los-kernel
-          path: kali-nethunter-installer/kernel-nethunter-*.zip
+          path: "**/kernel-nethunter-*.zip"
