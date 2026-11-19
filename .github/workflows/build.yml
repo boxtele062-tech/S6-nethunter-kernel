@@ -9,16 +9,15 @@ jobs:
     steps:
       - name: Clone and Build
         run: |
-          BASE="https://gitlab.com/kalilinux"
+          BASE="https://gitlab.com"
           PATH_URL="nethunter/build-scripts"
           git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-installer.git"
           cd kali-nethunter-installer
           git clone --depth 1 "$BASE/$PATH_URL/kali-nethunter-devices.git" kernels
           python3 build.py --kernel zeroflte-los --nougat
 
-
       - name: Upload Kernel Artifact
         uses: actions/upload-artifact@v4
         with:
-        name: zeroflte-los-kernel 
-       path: "kali-nethunter-installer/*.zip"
+          name: zeroflte-los-kernel
+          path: "**/*.zip"
